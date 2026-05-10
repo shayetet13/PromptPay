@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<!-- HTML Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>สร้าง QR Code PromptPay ได้ง่ายๆ</title>
+
+<meta name="description" content="สแกนได้จริง ใช้เลย ฟรี">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:url" content="https://qr-promptpay.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="สร้าง QR Code PromptPay ได้ง่ายๆ">
+<meta property="og:description" content="สแกนได้จริง ใช้เลย ฟรี">
+<meta property="og:image" content="https://qr-promptpay.pages.dev/qrcodepp-2.png">
+<meta property="og:image:secure_url" content="https://qr-promptpay.pages.dev/qrcodepp-2.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="QR PromptPay">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="สร้าง QR Code PromptPay ได้ง่ายๆ">
+<meta name="twitter:description" content="สแกนได้จริง ใช้เลย ฟรี">
+<meta name="twitter:image" content="https://qr-promptpay.pages.dev/qrcodepp-2.png">
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+
+<!-- NOTE: You selected a new image. Please upload it to your server and replace "YOUR_IMAGE_URL_HERE" with the actual URL. -->
+
+<title>PromptPay Premium QR</title>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+body{
+
+  min-height:100vh;
+
+  background:
+  radial-gradient(circle at top,#1e293b,#020617);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  color:white;
+}
+
+.card{
+
+  width:100%;
+  max-width:520px;
+
+  background:rgba(255,255,255,0.05);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(16px);
+
+  border-radius:30px;
+
+  padding:30px;
+
+  box-shadow:
+  0 20px 80px rgba(0,0,0,0.5);
+}
+
+.badge{
+
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  background:rgba(255,255,255,0.06);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:13px;
+
+  color:#cbd5e1;
+
+  margin-bottom:18px;
+}
+
+h1{
+
+  font-size:34px;
+
+  margin-bottom:12px;
+
+  font-weight:800;
+}
+
+.sub{
+
+  color:#94a3b8;
+
+  line-height:1.7;
+
+  margin-bottom:28px;
+}
+
+.group{
+
+  margin-bottom:18px;
+}
+
+label{
+
+  display:block;
+
+  margin-bottom:10px;
+
+  color:#cbd5e1;
+
+  font-size:14px;
+}
+
+input,
+select{
+
+  width:100%;
+
+  height:58px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:#111827;
+
+  color:white;
+
+  padding:0 18px;
+
+  font-size:16px;
+
+  outline:none;
+}
+
+select option{
+
+  background:#111827;
+  color:white;
+}
+
+button{
+
+  width:100%;
+
+  height:58px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:
+  linear-gradient(135deg,#0ea5e9,#2563eb);
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+/* ====================== */
+/* MODAL */
+/* ====================== */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,0.75);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:0.25s;
+
+  z-index:9999;
+}
+
+.modal.active{
+
+  opacity:1;
+  visibility:visible;
+}
+
+.modal-content{
+
+  width:100%;
+  max-width:420px;
+
+  background:white;
+
+  border-radius:36px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  animation:show 0.25s ease;
+}
+
+@keyframes show{
+
+  from{
+    transform:translateY(20px);
+    opacity:0;
+  }
+
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* ====================== */
+/* MOBILE SLIP */
+/* ====================== */
+
+.mobile-top{
+
+  background:
+  linear-gradient(135deg,#00a1ff,#0047ff);
+
+  padding:22px;
+
+  color:white;
+}
+
+.bank-row{
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.bank-logo{
+
+  width:58px;
+  height:58px;
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:8px;
+
+  object-fit:contain;
+}
+
+.bank-text h2{
+
+  font-size:22px;
+
+  font-weight:800;
+}
+
+.bank-text p{
+
+  opacity:0.9;
+
+  font-size:14px;
+}
+
+.amount{
+
+  font-size:42px;
+
+  font-weight:800;
+
+  margin-top:24px;
+}
+
+.slip-body{
+
+  padding:26px;
+
+  color:#111827;
+}
+
+.qr-wrapper{
+
+  background:#f8fafc;
+
+  border-radius:24px;
+
+  padding:20px;
+
+  text-align:center;
+}
+
+#qrcode{
+
+  display:flex;
+  justify-content:center;
+}
+
+#qrcode canvas{
+
+  width:100% !important;
+  max-width:260px;
+  height:auto !important;
+
+  border-radius:18px;
+}
+
+.info{
+
+  margin-top:22px;
+}
+
+.info-row{
+
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:16px;
+
+  font-size:15px;
+}
+
+.info-row span:first-child{
+
+  color:#64748b;
+}
+
+.promptpay-logo{
+
+  width:150px;
+
+  margin-top:18px;
+}
+
+.download{
+
+  margin-top:22px;
+
+  background:#0f172a;
+}
+
+.close{
+
+  position:absolute;
+
+  top:14px;
+  right:14px;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.18);
+
+  color:white;
+
+  font-size:18px;
+
+  backdrop-filter:blur(10px);
+}
+
+@media(max-width:768px){
+
+  .card{
+
+    padding:22px;
+  }
+
+  h1{
+
+    font-size:28px;
+  }
+
+  .amount{
+
+    font-size:34px;
+  }
+}
+
+.bank-logo{
+
+  width:60px;
+  height:60px;
+
+  object-fit:contain;
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:8px;
+
+  border:1px solid #e5e7eb;
+
+  box-shadow:
+  0 4px 12px rgba(0,0,0,0.08);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<center>
+<div class="badge">
+● Thai QR Payment PowerBy เก๊า
+</div>
+
+<h1>
+PromptPay Premium
+</h1>
+
+<p class="sub">
+สร้าง QR พร้อมเพย์แบบ Mobile Banking รองรับทุกธนาคาร
+</p>
+</center>
+<div class="group">
+
+<label>
+ประเภทบัญชี
+</label>
+
+<select id="type">
+
+<option value="phone">
+เบอร์โทรศัพท์
+</option>
+
+<option value="idcard">
+เลขบัตรประชาชน
+</option>
+
+</select>
+
+</div>
+
+<div class="group">
+
+<label>
+เบอร์โทร / เลขบัตรประชาชน
+</label>
+
+<input
+type="text"
+id="target"
+placeholder="0812345678"
+maxlength="10"
+/>
+
+</div>
+
+<div class="group">
+
+<label>
+ชื่อ - นามสกุล
+</label>
+
+<input
+type="text"
+id="fullname"
+placeholder="นาย ทดสอบ ใจดี"
+/>
+
+</div>
+
+<div class="group">
+
+<label>
+ธนาคาร
+</label>
+
+<select id="bank">
+
+  <option value="kbank">Kasikorn Bank</option>
+  <option value="scb">SCB</option>
+  <option value="bbl">Bangkok Bank</option>
+  <option value="ktb">Krungthai Bank</option>
+  <option value="bay">Krungsri</option>
+  <option value="ttb">TTB</option>
+  <option value="uob">UOB</option>
+  <option value="cimb">CIMB Thai</option>
+  <option value="gsb">Government Savings Bank</option>
+  <option value="ghb">Government Housing Bank</option>
+  <option value="baac">BAAC</option>
+  <option value="kk">Kiatnakin Phatra</option>
+  <option value="tisco">TISCO</option>
+  <option value="lhb">แลนด์ แอนด์ เฮ้าส์</option>
+  <option value="ibank">Islamic Bank</option>
+  <option value="icbc">ICBC</option>
+  <option value="hsbc">HSBC</option>
+  <option value="citi">Citibank</option>
+  <option value="mega">Mega Bank</option>
+  <option value="smbc">SMBC</option>
+
+</select>
+
+</select>
+
+</div>
+
+<div class="group">
+
+<label>
+จำนวนเงิน
+</label>
+
+<input
+type="number"
+id="amount"
+placeholder="100.00"
+/>
+
+</div>
+
+<button onclick="generateQR()">
+สร้าง QR Code
+</button>
+
+</div>
+
+<!-- ====================== -->
+<!-- MODAL -->
+<!-- ====================== -->
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<button
+class="close"
+onclick="closeModal()"
+>
+✕
+</button>
+
+<div class="mobile-top">
+
+<div class="bank-row">
+
+<img
+id="bankLogo"
+class="bank-logo"
+/>
+
+<div class="bank-text">
+
+<h2 id="bankName">
+Kasikorn Bank
+</h2>
+
+</div>
+
+</div>
+
+<div class="amount" id="amountText">
+฿0.00
+</div>
+
+</div>
+
+<div class="slip-body">
+
+<div class="qr-wrapper">
+
+<div id="qrcode"></div>
+
+<img
+src="th/prompt-pay-logo.png"
+class="promptpay-logo"
+/>
+
+<p id="fullNameText">
+-
+</p>
+
+</div>
+
+<div class="info">
+
+<div class="info-row">
+<span>PromptPay ID</span>
+<span id="targetText"></span>
+</div>
+
+<div class="info-row">
+<span>Date</span>
+<span id="dateText"></span>
+</div>
+
+</div>
+
+<button
+class="download"
+onclick="downloadQR()"
+>
+ดาวน์โหลด QR
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+const bankLogos = {
+
+  baac: 'th/baac.png',
+  bay: 'th/bay.png',
+  bbl: 'th/bbl.png',
+  bnp: 'th/bnp.png',
+  boa: 'th/boa.png',
+  cacib: 'th/cacib.png',
+  cimb: 'th/cimb.png',
+  citi: 'th/citi.png',
+  db: 'th/db.png',
+
+  ghb: 'th/ghb.png',
+  gsb: 'th/gsb.png',
+  hsbc: 'th/hsbc.png',
+  ibank: 'th/ibank.png',
+  icbc: 'th/icbc.png',
+  jpm: 'th/jpm.png',
+  kbank: 'th/kbank.png',
+  kk: 'th/kk.png',
+  ktb: 'th/ktb.png',
+
+  lhb: 'th/lhb.png',
+  mb: 'th/mb.png',
+  mega: 'th/mega.png',
+  mufg: 'th/mufg.png',
+  rbs: 'th/rbs.png',
+  sc: 'th/sc.png',
+  scb: 'th/scb.png',
+  smbc: 'th/smbc.png',
+  tbank: 'th/tbank.png',
+
+  tcrb: 'th/tcrb.png',
+  tisco: 'th/tisco.png',
+  tmb: 'th/tmb.png',
+  ttb: 'th/ttb.png',
+  uob: 'th/uob.png'
+};
+
+/* ====================== */
+/* CRC16 */
+/* ====================== */
+
+function crc16(s){
+
+  let crc = 0xFFFF;
+
+  for(let i=0;i<s.length;i++){
+
+    crc ^= s.charCodeAt(i) << 8;
+
+    for(let j=0;j<8;j++){
+
+      if(crc & 0x8000){
+
+        crc =
+        (crc << 1) ^ 0x1021;
+
+      }else{
+
+        crc <<= 1;
+      }
+
+      crc &= 0xFFFF;
+    }
+  }
+
+  return crc
+  .toString(16)
+  .toUpperCase()
+  .padStart(4,'0');
+}
+
+/* ====================== */
+/* PAYLOAD */
+/* ====================== */
+
+function generatePayload(
+  account,
+  amount,
+  type
+){
+
+  account =
+  account.replace(/\D/g,'');
+
+  let target = '';
+
+  if(type === 'phone'){
+
+    if(account.startsWith('0')){
+
+      account =
+      '66' +
+      account.substring(1);
+    }
+
+    target =
+      '0016A000000677010111' +
+      '01130066' +
+      account.substring(2);
+
+  }else{
+
+    target =
+      '0016A000000677010111' +
+      '0213' +
+      account;
+  }
+
+  let payload =
+
+    '000201' +
+    '010211' +
+
+    '29' +
+    target.length
+    .toString()
+    .padStart(2,'0') +
+
+    target +
+
+    '5303764';
+
+  if(amount){
+
+    amount =
+    parseFloat(amount)
+    .toFixed(2);
+
+    payload +=
+
+      '54' +
+
+      amount.length
+      .toString()
+      .padStart(2,'0') +
+
+      amount;
+  }
+
+  payload +=
+
+    '5802TH' +
+    '6304';
+
+  payload += crc16(payload);
+
+  return payload;
+}
+
+/* ====================== */
+/* GENERATE QR */
+/* ====================== */
+
+function generateQR(){
+
+  const type =
+  document
+  .getElementById('type')
+  .value;
+
+  const target =
+  document
+  .getElementById('target')
+  .value;
+
+  const amount =
+  document
+  .getElementById('amount')
+  .value;
+
+  const fullname =
+  document
+  .getElementById('fullname')
+  .value;
+
+  const bank =
+  document
+  .getElementById('bank')
+  .value;
+
+  const bankName =
+  document
+  .getElementById('bank')
+  .options[
+    document
+    .getElementById('bank')
+    .selectedIndex
+  ].text;
+
+  if(!target){
+
+    alert('กรุณากรอกข้อมูล');
+    return;
+  }
+
+  const payload =
+  generatePayload(
+    target,
+    amount,
+    type
+  );
+
+  document
+  .getElementById('bankLogo')
+  .src =
+  bankLogos[bank];
+
+  document
+  .getElementById('bankName')
+  .innerText =
+  bankName;
+
+  document
+  .getElementById('fullNameText')
+  .innerText =
+  fullname;
+
+  document
+  .getElementById('targetText')
+  .innerText =
+  target;
+
+  document
+  .getElementById('amountText')
+  .innerText =
+  '฿' +
+  parseFloat(amount || 0)
+  .toLocaleString(
+    'th-TH',
+    {
+      minimumFractionDigits:2
+    }
+  );
+
+  document
+  .getElementById('dateText')
+  .innerText =
+  new Date()
+  .toLocaleString('th-TH');
+
+  const qr =
+  document
+  .getElementById('qrcode');
+
+  qr.innerHTML = '';
+
+  QRCode.toCanvas(
+
+    payload,
+
+    {
+      width:300,
+      margin:1
+    },
+
+    function(err,canvas){
+
+      if(err){
+
+        alert('QR Error');
+        return;
+      }
+
+      qr.appendChild(canvas);
+
+      document
+      .getElementById('modal')
+      .classList
+      .add('active');
+    }
+  );
+}
+
+/* ====================== */
+/* CLOSE */
+/* ====================== */
+
+function closeModal(){
+
+  document
+  .getElementById('modal')
+  .classList
+  .remove('active');
+}
+
+/* ====================== */
+/* DOWNLOAD */
+/* ====================== */
+
+function downloadQR(){
+
+  const canvas =
+  document.querySelector(
+    '#qrcode canvas'
+  );
+
+  if(!canvas) return;
+
+  const link =
+  document.createElement('a');
+
+  link.download =
+  'promptpay-slip.png';
+
+  link.href =
+  canvas.toDataURL(
+    'image/png'
+  );
+
+  link.click();
+}
+
+/* ====================== */
+/* CLICK BG CLOSE */
+/* ====================== */
+
+document
+.getElementById('modal')
+.addEventListener(
+  'click',
+  function(e){
+
+    if(
+      e.target.id ===
+      'modal'
+    ){
+
+      closeModal();
+    }
+  }
+);
+
+const typeSelect =
+document.getElementById('type');
+
+const targetInput =
+document.getElementById('target');
+
+/* ====================== */
+/* CHANGE TYPE */
+/* ====================== */
+
+typeSelect.addEventListener(
+  'change',
+  function(){
+
+    if(this.value === 'phone'){
+
+      targetInput.placeholder =
+      '080-123-4567';
+
+      targetInput.maxLength = 10;
+
+      targetInput.value = '';
+
+    }else{
+
+      targetInput.placeholder =
+      '1-2345-67890-12-3';
+
+      targetInput.maxLength = 13;
+
+      targetInput.value = '';
+    }
+  }
+);
+
+/* ====================== */
+/* NUMBER ONLY */
+/* ====================== */
+
+targetInput.addEventListener(
+  'input',
+  function(){
+
+    this.value =
+    this.value.replace(/\D/g,'');
+  }
+);
+
+</script>
+
+</body>
+</html>
